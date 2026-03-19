@@ -23,6 +23,12 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
 
+@font-face {
+  font-family: 'Monohipster';
+  src: url('../fonts/Monohipster.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
 /* -------------------------------------------------------------
    2. VARIABLES GLOBALES
@@ -54,7 +60,7 @@
   /* Texto secundario, placeholders */
 
   /* --- Fuentes --- */
-  --font-display: 'Cinzel', Georgia, serif;
+  --font-display: 'Monohipster', Georgia, serif;
   /* Títulos, romanos, botones */
   --font-body: 'EB Garamond', Georgia, serif;
   /* Cuerpo, descripciones */

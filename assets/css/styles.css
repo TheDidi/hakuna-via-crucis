@@ -42,21 +42,21 @@
   /* Fondo de toda la app */
   --color-bg-surface: #1a1714;
   /* Fondo de tarjetas, topbar */
-  --color-bg-hover: #242018;
+  --color-bg-hover: #1f1824;
   /* Fondo al hacer hover */
 
   /* --- Dorado (acento principal) --- */
-  --color-gold: #c9a84c;
+  --color-gold: #c2c2c2;
   /* Dorado principal */
-  --color-gold-light: #e8c96e;
+  --color-gold-light: #dddddd;
   /* Dorado claro (hover, brillo) */
-  --color-gold-dim: #7a6030;
+  --color-gold-dim: #cccccc;
   /* Dorado apagado (bordes, textos secundarios) */
 
   /* --- Textos --- */
-  --color-text: #e8dfc8;
+  --color-text: #eeeeee;
   /* Texto principal */
-  --color-text-dim: #9e9080;
+  --color-text-dim: #a0a0a0;
   /* Texto secundario, placeholders */
 
   /* --- Fuentes --- */
@@ -253,7 +253,6 @@ a {
 
 .site-header__subtitle {
   font-family: var(--font-body);
-  font-style: italic;
   font-size: clamp(0.9rem, 2.5vw, var(--font-size-md));
   color: var(--color-gold-dim);
   letter-spacing: 0.25em;

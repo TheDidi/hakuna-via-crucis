@@ -38,9 +38,9 @@
 
 :root {
   /* --- Colores principales --- */
-  --color-bg: #0e0c0a;
+  --color-bg: #0d0a0e;
   /* Fondo de toda la app */
-  --color-bg-surface: #1a1714;
+  --color-bg-surface: #17141a;
   /* Fondo de tarjetas, topbar */
   --color-bg-hover: #1f1824;
   /* Fondo al hacer hover */

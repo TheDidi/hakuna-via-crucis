@@ -1,0 +1,576 @@
+/* =============================================================
+   HAKUNA LLEIDA – Vía Crucis
+   styles.css — Hoja de estilos global centralizada
+   =============================================================
+
+   ÍNDICE
+   1. Fuentes (Google Fonts)
+   2. Variables globales (colores, tipografía, espaciado)
+   3. Reset & base
+   4. Componentes compartidos (topbar, nav, footer, grain)
+   5. Página principal (index)
+   6. Página de estación
+   ============================================================= */
+
+
+/* -------------------------------------------------------------
+   1. FUENTES
+   Para cambiar las fuentes del proyecto, edita SOLO este bloque.
+   - --font-display  → títulos, numerales romanos, botones
+   - --font-body     → textos, subtítulos, descripciones
+   Cámbia el @import y las variables --font-* de una sola vez.
+   ------------------------------------------------------------- */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
+
+
+/* -------------------------------------------------------------
+   2. VARIABLES GLOBALES
+   Aquí están TODOS los valores que puedes querer cambiar:
+   colores, fuentes, radios, sombras, transiciones.
+   ------------------------------------------------------------- */
+
+:root {
+  /* --- Colores principales --- */
+  --color-bg: #0e0c0a;
+  /* Fondo de toda la app */
+  --color-bg-surface: #1a1714;
+  /* Fondo de tarjetas, topbar */
+  --color-bg-hover: #242018;
+  /* Fondo al hacer hover */
+
+  /* --- Dorado (acento principal) --- */
+  --color-gold: #c9a84c;
+  /* Dorado principal */
+  --color-gold-light: #e8c96e;
+  /* Dorado claro (hover, brillo) */
+  --color-gold-dim: #7a6030;
+  /* Dorado apagado (bordes, textos secundarios) */
+
+  /* --- Textos --- */
+  --color-text: #e8dfc8;
+  /* Texto principal */
+  --color-text-dim: #9e9080;
+  /* Texto secundario, placeholders */
+
+  /* --- Fuentes --- */
+  --font-display: 'Cinzel', Georgia, serif;
+  /* Títulos, romanos, botones */
+  --font-body: 'EB Garamond', Georgia, serif;
+  /* Cuerpo, descripciones */
+
+  /* --- Tamaños de fuente base --- */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.85rem;
+  --font-size-base: 1rem;
+  --font-size-md: 1.1rem;
+  --font-size-lg: 1.3rem;
+
+  /* --- Espaciado --- */
+  --space-xs: 0.4rem;
+  --space-sm: 0.75rem;
+  --space-md: 1.25rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 4rem;
+
+  /* --- Bordes y sombras --- */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --border-dim: 1px solid var(--color-gold-dim);
+  --border-subtle: 1px solid rgba(201, 168, 76, 0.15);
+  --shadow-card: 0 8px 40px rgba(0, 0, 0, 0.6);
+
+  /* --- Transiciones --- */
+  --transition-fast: 0.2s ease;
+  --transition-base: 0.25s ease;
+}
+
+
+/* -------------------------------------------------------------
+   3. RESET & BASE
+   ------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Textura de grano sutil sobre toda la app */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.4;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+/* -------------------------------------------------------------
+   4. COMPONENTES COMPARTIDOS
+   ------------------------------------------------------------- */
+
+/* --- Barra de navegación superior (estaciones) --- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-base, 1rem) var(--space-lg);
+  border-bottom: var(--border-subtle);
+  background: var(--color-bg-surface);
+  flex-shrink: 0;
+}
+
+.topbar__home {
+  font-family: var(--font-display);
+  font-size: var(--font-size-sm);
+  color: var(--color-gold-dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: color var(--transition-fast);
+}
+
+.topbar__home:hover {
+  color: var(--color-gold);
+}
+
+.topbar__label {
+  font-family: var(--font-display);
+  font-size: var(--font-size-sm);
+  color: var(--color-gold);
+  letter-spacing: 0.12em;
+}
+
+/* --- Divisor decorativo --- */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  margin: var(--space-xl) auto;
+  max-width: 400px;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+}
+
+.divider::before {
+  background: linear-gradient(to right, transparent, var(--color-gold-dim));
+}
+
+.divider::after {
+  background: linear-gradient(to left, transparent, var(--color-gold-dim));
+}
+
+.divider__icon {
+  color: var(--color-gold);
+  font-size: var(--font-size-md);
+}
+
+/* --- Footer --- */
+.footer {
+  text-align: center;
+  padding: var(--space-xl);
+  color: var(--color-text-dim);
+  font-size: var(--font-size-sm);
+  font-style: italic;
+}
+
+/* --- Animaciones --- */
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* -------------------------------------------------------------
+   5. PÁGINA PRINCIPAL (index.html)
+   ------------------------------------------------------------- */
+
+/* Cabecera */
+.site-header {
+  text-align: center;
+  padding: var(--space-2xl) var(--space-lg) var(--space-xl);
+}
+
+.site-header__cross {
+  display: block;
+  margin: 0 auto var(--space-lg);
+  opacity: 0.85;
+  animation: fadeDown 1s ease both;
+}
+
+.site-header__subtitle {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: clamp(0.9rem, 2.5vw, var(--font-size-md));
+  color: var(--color-gold-dim);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-sm);
+  animation: fadeDown 1s 0.1s ease both;
+}
+
+.site-header__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 7vw, 4rem);
+  font-weight: 700;
+  color: var(--color-gold);
+  letter-spacing: 0.08em;
+  line-height: 1.1;
+  animation: fadeDown 1s 0.2s ease both;
+}
+
+/* Contenido principal */
+.site-main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--space-base, 1rem) var(--space-md) 5rem;
+}
+
+/* Grid de botones de estaciones */
+.stations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 0.85rem;
+}
+
+/* Botón de estación */
+.station-btn {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--color-bg-surface);
+  border: var(--border-dim);
+  border-radius: var(--radius-md);
+  padding: 1rem var(--space-md);
+  cursor: pointer;
+  color: var(--color-text);
+  transition: background var(--transition-base),
+    border-color var(--transition-base),
+    transform var(--transition-fast);
+  animation: fadeUp 0.6s ease both;
+  position: relative;
+  overflow: hidden;
+}
+
+.station-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.07), transparent);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.station-btn:hover {
+  background: var(--color-bg-hover);
+  border-color: var(--color-gold);
+  transform: translateY(-2px);
+}
+
+.station-btn:hover::after {
+  opacity: 1;
+}
+
+.station-btn__num {
+  font-family: var(--font-display);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-gold);
+  min-width: 2rem;
+  text-align: center;
+  line-height: 1;
+}
+
+.station-btn__text {
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  line-height: 1.35;
+  color: var(--color-text);
+}
+
+.station-btn__chevron {
+  margin-left: auto;
+  color: var(--color-gold-dim);
+  font-size: var(--font-size-base);
+  transition: color var(--transition-fast), transform var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.station-btn:hover .station-btn__chevron {
+  color: var(--color-gold);
+  transform: translateX(3px);
+}
+
+/* Animaciones escalonadas para los botones */
+.station-btn:nth-child(1) {
+  animation-delay: 0.05s
+}
+
+.station-btn:nth-child(2) {
+  animation-delay: 0.10s
+}
+
+.station-btn:nth-child(3) {
+  animation-delay: 0.15s
+}
+
+.station-btn:nth-child(4) {
+  animation-delay: 0.20s
+}
+
+.station-btn:nth-child(5) {
+  animation-delay: 0.25s
+}
+
+.station-btn:nth-child(6) {
+  animation-delay: 0.30s
+}
+
+.station-btn:nth-child(7) {
+  animation-delay: 0.35s
+}
+
+.station-btn:nth-child(8) {
+  animation-delay: 0.40s
+}
+
+.station-btn:nth-child(9) {
+  animation-delay: 0.45s
+}
+
+.station-btn:nth-child(10) {
+  animation-delay: 0.50s
+}
+
+.station-btn:nth-child(11) {
+  animation-delay: 0.55s
+}
+
+.station-btn:nth-child(12) {
+  animation-delay: 0.60s
+}
+
+.station-btn:nth-child(13) {
+  animation-delay: 0.65s
+}
+
+.station-btn:nth-child(14) {
+  animation-delay: 0.70s
+}
+
+.station-btn:nth-child(15) {
+  animation-delay: 0.75s
+}
+
+
+/* -------------------------------------------------------------
+   6. PÁGINA DE ESTACIÓN (estacion-XX.html)
+   ------------------------------------------------------------- */
+
+.station-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Cabecera de estación */
+.station-header {
+  text-align: center;
+  padding: var(--space-xl) var(--space-lg) var(--space-lg);
+  flex-shrink: 0;
+  animation: fadeDown 0.7s ease both;
+}
+
+.station-header__roman {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 5vw, 2.5rem);
+  font-weight: 700;
+  color: var(--color-gold);
+  display: block;
+  margin-bottom: var(--space-xs);
+}
+
+.station-header__title {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: clamp(1.1rem, 3.5vw, 1.5rem);
+  font-weight: 400;
+  color: var(--color-text);
+  line-height: 1.35;
+}
+
+/* Área de imagen */
+.image-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-xs) var(--space-md) var(--space-lg);
+  animation: fadeUp 0.7s 0.15s ease both;
+}
+
+.image-area__img {
+  max-width: 100%;
+  max-height: calc(100vh - 280px);
+  width: auto;
+  height: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  box-shadow: var(--shadow-card);
+  object-fit: contain;
+  display: block;
+}
+
+/* Placeholder mientras no hay imagen */
+.image-placeholder {
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 4/3;
+  background: var(--color-bg-surface);
+  border: 2px dashed var(--color-gold-dim);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  color: var(--color-text-dim);
+  font-style: italic;
+  text-align: center;
+  padding: var(--space-base, 1rem);
+}
+
+/* Navegación inferior entre estaciones */
+.station-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding: 1rem var(--space-lg) var(--space-xl);
+  flex-shrink: 0;
+}
+
+.station-nav__btn {
+  font-family: var(--font-display);
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.08em;
+  color: var(--color-gold);
+  border: var(--border-dim);
+  border-radius: var(--radius-sm);
+  padding: 0.55rem 1.1rem;
+  transition: background var(--transition-fast),
+    border-color var(--transition-fast);
+  white-space: nowrap;
+}
+
+.station-nav__btn:hover {
+  background: rgba(201, 168, 76, 0.1);
+  border-color: var(--color-gold);
+}
+
+.station-nav__btn--disabled {
+  color: var(--color-text-dim);
+  border-color: rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.station-nav__counter {
+  font-family: var(--font-display);
+  font-size: var(--font-size-xs);
+  color: var(--color-gold-dim);
+  letter-spacing: 0.1em;
+}
+
+
+/* -------------------------------------------------------------
+   7. CONTENIDO DE CANCIÓN (estaciones con letra)
+   ------------------------------------------------------------- */
+
+.song-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 var(--space-md) var(--space-xl);
+  animation: fadeUp 0.7s 0.15s ease both;
+}
+
+.song-title {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 3.5vw, 1.35rem);
+  font-weight: 600;
+  color: var(--color-gold);
+  letter-spacing: 0.06em;
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.song-lyrics {
+  max-width: 560px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.song-lyrics p {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
+  line-height: 1.85;
+  color: var(--color-text);
+  text-align: center;
+}
+
+/* Estrofa destacada: coro, puente, etc. */
+.song-lyrics p.coro {
+  color: var(--color-gold-light);
+  font-style: italic;
+}
